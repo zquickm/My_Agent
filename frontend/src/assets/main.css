@@ -1,3 +1,21 @@
 * { box-sizing: border-box; }
-body { margin: 0; font-family: system-ui, 'Microsoft YaHei', sans-serif; background: #f5f6f8; }
-#app { max-width: 720px; margin: 0 auto; height: 100vh; }
+body {
+  margin: 0;
+  font-family: system-ui, 'Segoe UI', 'Microsoft YaHei', sans-serif;
+  background: #f7f8fa;
+  color: #1f2329;
+  -webkit-font-smoothing: antialiased;
+}
+#app { height: 100vh; }
+::selection { background: rgba(51, 112, 255, 0.18); }
+
+/* FastGPT 式渐变空态面板，ChatView 的 hero 和 App 的预留位共用 */
+.panel-card {
+  background:
+    radial-gradient(120% 150% at 20% 0%, #e9edff 0%, rgba(233, 237, 255, 0) 55%),
+    radial-gradient(110% 140% at 85% 15%, #f3e9ff 0%, rgba(243, 233, 255, 0) 60%),
+    #fdfdff;
+  border: 1px solid #eef0f6;
+  border-radius: 16px;
+  text-align: center;
+}

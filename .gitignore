@@ -17,6 +17,10 @@ dist/
 dist-ssr/
 *.local
 
+# ---- 运行时数据（数据库由 store.py 自动创建）----
+*.db
+*.sqlite3
+
 # ---- 日志与系统垃圾文件 ----
 *.log
 .DS_Store

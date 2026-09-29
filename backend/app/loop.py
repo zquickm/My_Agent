@@ -25,7 +25,7 @@ async def run_turn(log: SessionLog) -> AsyncIterator[str]:
         calls: list = []
         async for ch in llm.stream_completion(messages, tools.openai_schemas()):
             if ch.text:
-                yield sse(log.append("text_delta", content=ch.text))
+                yield sse(await log.append("text_delta", content=ch.text))
             if ch.finish:
                 finish, calls = ch.finish, ch.tool_calls
 
@@ -33,9 +33,9 @@ async def run_turn(log: SessionLog) -> AsyncIterator[str]:
             break   # 模型不再要工具 = 最终回答已流式输出完毕
 
         for call in calls:
-            yield sse(log.append("tool_call", call_id=call.id,
+            yield sse(await log.append("tool_call", call_id=call.id,
                                  name=call.name, arguments=call.arguments))
             output = await tools.execute(call.name, call.arguments)
-            yield sse(log.append("tool_result", call_id=call.id,
+            yield sse(await log.append("tool_result", call_id=call.id,
                                  name=call.name, output=output))
         # 回到顶部：投影函数已把工具结果变成 messages，带着结果再问模型
